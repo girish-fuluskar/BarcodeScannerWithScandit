@@ -1,0 +1,27 @@
+android {
+    // use same NDK version as the main android project
+    // this version is included in the docker image used for cordova build
+    ndkVersion "21.4.7075529"
+    
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    kotlinOptions {
+        languageVersion = "1.3"
+    }
+}
+
+def parentFile = project.projectDir.parentFile
+
+repositories {
+    maven { url "file://${parentFile}/../../../../.m2/repository" }
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    def sdk_version = "6.13.1"
+
+    api "com.scandit.datacapture:core:$sdk_version"
+}
